@@ -1,0 +1,249 @@
+<div class="panel panel-default">
+  <div class="panel-header">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#myTrvls">My Travels</a></li>
+      <li><a data-toggle="tab" href="#myApprvls">My Approvals</a></li>
+      <li><a data-toggle="tab" href="#cncldTrvls">Cancelled Travels</a></li>
+    </ul>
+  </div>
+  <div class="panel panel-body">
+    <div class="tab-content">
+      <div id="myTrvls" class="tab-pane fade in active">
+        <div class="row" *ngFor="let trvl of TravelDet">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label>Purpose:</label> <span>{{ trvl.Purpose }}</span>
+                </div>
+                <div class="col-lg-4">
+                  <label>Indent Number:</label> <span>{{ trvl.Id }}</span>
+                </div>
+                <div class="col-lg-4">
+                  <label>Requested Date:</label> <span>{{ trvl.RequestedDate }}</span>
+                </div>
+              </div>
+              <div class="col-lg-12 tbbrdr" style="background-color:#ccc">
+                <div class="col-lg-4">
+                  <h5><strong>Origin</strong></h5>
+                </div>
+                <div class="col-lg-4">
+                  <h5><strong>Destination</strong></h5>
+                </div>
+                <div class="col-lg-4">
+                  <h5><strong>Travel Date</strong></h5>
+                </div>
+              </div>
+              <div class="col-lg-12 tbbrdr" *ngFor="let Travel of trvl.TravelDetails">
+                <div class="col-lg-4">
+                  <h5>{{ Travel.Origin }}</h5>
+                </div>
+                <div class="col-lg-4">
+                  <h5>{{ Travel.Destination }}</h5>
+                </div>
+                <div class="col-lg-4">
+                  <h5>{{ Travel.TravelDate }}</h5>
+                </div>
+              </div>              
+              <div class="col-lg-12" style="margin-top:10px;">
+                <div class="col-lg-6">
+                  <label>Status:</label> {{ trvl.Status }}
+                </div>
+                <div class="col-lg-6 text-right" *ngIf="trvl.Status !='Cancelled'">                  
+                  <button class="btn btn-primary" (click)="getRescheduleDet(trvl)" data-toggle="modal" data-target="#rescheduleModal">Reschedule</button>
+                  <button class="btn btn-primary" (click)="cancelReq(trvl.Id)" style="margin-left:10px;" data-toggle="modal" data-target="#cancelModal">Cancellation</button>
+
+                </div>
+                <!-- Cancellation Modal Start-->
+                <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header bg-primary">
+                        <label class="modal-title text-left" id="cancelModalLabel">Cancellation</label>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to cancel the travel request?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="CancelTravelRequest()">Yes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Cancellation Modal End -->
+
+              <!-- Modal Start-->
+              <div class="modal fade" id="rescheduleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                      <label>Reschedule</label>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-lg-4">
+                              <label>Purpose:</label> <span>{{ RescheduleDet.Purpose }}</span>
+                            </div>
+                            <div class="col-lg-4">
+                              <label>Indent Number:</label> <span>{{ RescheduleDet.Id }}</span>
+                            </div>
+                            <div class="col-lg-4">
+                              <label>Requested Date:</label> <span>{{ RescheduleDet.RequestedDate }}</span>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 tbbrdr" style="background-color:#ccc">
+                            <div class="col-lg-4">
+                              <h5><strong>Origin</strong></h5>
+                            </div>
+                            <div class="col-lg-4">
+                              <h5><strong>Destination</strong></h5>
+                            </div>
+                            <div class="col-lg-4">
+                              <h5><strong>Travel Date</strong></h5>
+                            </div>
+                          </div>                          
+                          <div class="col-lg-12 tbbrdr" *ngFor="let trvlDet of RescheduleDet.TravelDetails">
+                            <div class="col-lg-4">
+                              <h5>{{ trvlDet.Destination }}</h5>
+                            </div>
+                            <div class="col-lg-4">
+                              <h5>Hyderabad, India</h5>
+                            </div>
+                            <div class="col-lg-4">
+                              <h5><input type="text" id="Dt2" placeholder="Datepicker" value="{{ trvlDet.TravelDate }}" class="form-control" style="cursor:pointer"
+                                  bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MMM-YYYY' }"></h5>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Reschedule</button>
+                      </div>
+                      <!-- Modal End -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+      <div id="myApprvls" class="tab-pane fade">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-4">
+                <label>Purpose:</label> <span>This is test Visit</span>
+              </div>
+              <div class="col-lg-4">
+                <label>Indent Number:</label> <span>130</span>
+              </div>
+              <div class="col-lg-4">
+                <label>Requested Date:</label> <span>30-Jun-2016</span>
+              </div>
+            </div>
+            <div class="col-lg-12 tbbrdr" style="background-color:#ccc">
+              <div class="col-lg-4">
+                <h5><strong>Origin</strong></h5>
+              </div>
+              <div class="col-lg-4">
+                <h5><strong>Destination</strong></h5>
+              </div>
+              <div class="col-lg-4">
+                <h5><strong>Travel Date</strong></h5>
+              </div>
+            </div>
+            <div class="col-lg-12 tbbrdr">
+              <div class="col-lg-4">
+                <h5>Hyderabad, India</h5>
+              </div>
+              <div class="col-lg-4">
+                <h5>Mumbai, India</h5>
+              </div>
+              <div class="col-lg-4">
+                <h5>22-Jul-2016</h5>
+              </div>
+            </div>
+            <div class="col-lg-12 tbbrdr">
+              <div class="col-lg-4">
+                <h5>Mumbai, India</h5>
+              </div>
+              <div class="col-lg-4">
+                <h5>Hyderabad, India</h5>
+              </div>
+              <div class="col-lg-4">
+                <h5>23-Jul-2016</h5>
+              </div>
+            </div>
+            <div class="col-lg-12" style="margin-top:10px;">
+              <label>Status:</label> Pending with Project Manager</div>
+          </div>
+        </div>
+      </div>
+      <div id="cncldTrvls" class="tab-pane fade">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-4">
+                <label>Purpose:</label> <span>This is test Visit</span>
+              </div>
+              <div class="col-lg-4">
+                <label>Indent Number:</label> <span>130</span>
+              </div>
+              <div class="col-lg-4">
+                <label>Requested Date:</label> <span>30-Jun-2016</span>
+              </div>
+            </div>
+            <div class="col-lg-12 tbbrdr" style="background-color:#ccc">
+              <div class="col-lg-4">
+                <h5><strong>Origin</strong></h5>
+              </div>
+              <div class="col-lg-4">
+                <h5><strong>Destination</strong></h5>
+              </div>
+              <div class="col-lg-4">
+                <h5><strong>Travel Date</strong></h5>
+              </div>
+            </div>
+            <div class="col-lg-12 tbbrdr">
+              <div class="col-lg-4">
+                <h5>Hyderabad, India</h5>
+              </div>
+              <div class="col-lg-4">
+                <h5>Mumbai, India</h5>
+              </div>
+              <div class="col-lg-4">
+                <h5>22-Jul-2016</h5>
+              </div>
+            </div>
+            <div class="col-lg-12 tbbrdr">
+              <div class="col-lg-4">
+                <h5>Mumbai, India</h5>
+              </div>
+              <div class="col-lg-4">
+                <h5>Hyderabad, India</h5>
+              </div>
+              <div class="col-lg-4">
+                <h5>23-Jul-2016</h5>
+              </div>
+            </div>
+            <div class="col-lg-12" style="margin-top:10px;">
+              <label>Status:</label> Pending with Project Manager
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

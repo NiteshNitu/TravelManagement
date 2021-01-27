@@ -1,0 +1,17 @@
+.rowmargin{
+    margin:10px 0px;
+}
+
+.panel-heading{
+    background-color:#666;
+    color:#fff;
+    padding:5px 15px;
+}
+
+.innerpanel-heading{
+    background-color:#ccc;
+    color:#333;
+}
+.clear{
+    clear:both;
+}

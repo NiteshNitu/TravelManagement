@@ -1,0 +1,256 @@
+<!-- Travel Details Start -->
+<form #TravelForm="ngForm">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Travel Details
+  </div>
+  <div class="panel-body">
+    <div class="panel panel-default">
+      <div class="panel-heading innerpanel-heading">
+        <div class="row">
+          <div class="col-lg-3">
+            <strong>Origin</strong></div>
+          <div class="col-lg-3">
+            <strong>Destination</strong>
+          </div>
+          <div class="col-lg-3">
+            <strong>Travel Date</strong>
+          </div>
+          <div class="col-lg-2">
+            <strong>Preference</strong>
+          </div>
+          <div class="col-lg-1">&nbsp;</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row rowmargin">
+          <div class="col-lg-3">
+            <input type="text" name="origin1" placeholder="Enter Origin" class="form-control">
+          </div>
+          <div class="col-lg-3">
+            <input type="text" name="destination1" placeholder="Enter Destination" class="form-control">
+          </div>
+          <div class="col-lg-3">
+            <input type="text" name="travelDate1" placeholder="Select" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MMM-YYYY' }">
+          </div>
+          <div class="col-lg-2">
+            <select name="preference1" placeholder="Select" class="form-control">
+              <option>Select</option>
+              <option>6-11AM</option>
+              <option>12-6 PM</option>
+              <option>6-10PMM</option>
+            </select>
+          </div>
+        </div>
+        <div class="row rowmargin" *ngFor="let trvlDetails of trvlDet; let i = index" [attr.data-index]="i">
+          <div class="col-lg-3">
+            <input type="text" name="origin{{ trvlDetails }}" ngModel placeholder="Enter Origin" class="form-control">
+          </div>
+          <div class="col-lg-3">
+            <input type="text" name="destination{{ trvlDetails }}" ngModel placeholder="Enter Destination" class="form-control">
+          </div>
+          <div class="col-lg-3">
+            <input type="text" name="travelDate{{ trvlDetails }}" ngModel placeholder="Select" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MMM-YYYY' }">
+          </div>
+          <div class="col-lg-2">
+            <select name="preference{{ trvlDetails }}" placeholder="Select" class="form-control">
+              <option>Select</option>
+              <option>6-11AM</option>
+              <option>12-6 PM</option>
+              <option>6-10PMM</option>
+            </select>
+          </div>
+
+          <div class="col-lg-1">
+            <button class="btn btn-primary" (click)="deleteTrvlDet(i)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="addTrvlDet()">Add Travel</button>
+  </div>
+</div>
+<!-- Travel Details End -->
+
+<!-- Traveller Details Start -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Traveller Details
+  </div>
+  <div class="panel-body">
+    <div class="panel panel-default">
+      <div class="panel-heading innerpanel-heading">
+        <div class="row">
+          <div class="col-lg-3">
+            <strong>Given Name / First Name</strong></div>
+          <div class="col-lg-3">
+            <strong>Sur Name / Last Name</strong>
+          </div>
+          <div class="col-lg-2">
+            <strong>Contact Number</strong>
+          </div>
+          <div class="col-lg-2">
+            <strong>Gender</strong>
+          </div>
+          <div class="col-lg-2">
+            <strong>Email</strong>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row rowmargin">
+          <div class="col-lg-3">
+            <h5>ABC</h5>
+          </div>
+          <div class="col-lg-3">
+            <h5>DEF</h5>
+          </div>
+          <div class="col-lg-2">
+            <h5>85757578</h5>
+          </div>
+          <div class="col-lg-2">
+            <h5>Male</h5>
+          </div>
+          <div class="col-lg-2">
+            <h5>abc@gmail.com</h5>
+          </div>
+        </div>
+        <div class="row rowmargin" *ngFor="let TrvllrDet of travellers">
+          <div class="col-lg-3">
+            <h5>ABC</h5>
+          </div>
+          <div class="col-lg-3">
+            <h5>DEF</h5>
+          </div>
+          <div class="col-lg-2">
+            <h5>85757578</h5>
+          </div>
+          <div class="col-lg-2">
+            <h5>Male</h5>
+          </div>
+          <div class="col-lg-2">
+            <h5>abc@gmail.com</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary">Add Traveller</button>
+  </div>
+</div>
+<!-- Traveller Details End-->
+
+<!-- Travel Allowances Start -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Travel Allowances
+  </div>
+  <div class="panel-body">
+    <div class="panel panel-default">
+      <div class="panel-heading innerpanel-heading">
+        <div class="row">
+          <div class="col-lg-3">
+            <strong>Currency</strong></div>
+          <div class="col-lg-3">
+            <strong>Sur Name / Last Name</strong>
+          </div>
+          <div class="col-lg-6 text-center">
+            <strong>Purpose</strong>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row rowmargin">
+          <div class="col-lg-3">
+            <h5>INR</h5>
+          </div>
+          <div class="col-lg-3">
+            <h5>1000</h5>
+          </div>
+          <div class="col-lg-6">
+            <h5>This is test This is test</h5>
+          </div>
+        </div>
+        <div class="row rowmargin">
+          <div class="col-lg-3">
+            <h5>INR</h5>
+          </div>
+          <div class="col-lg-3">
+            <h5>1000</h5>
+          </div>
+          <div class="col-lg-6">
+            <h5>This is test This is test This is test This is test This is test This is test This is test This is test This
+              is test This is test</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary">Request Addl Travel Allowances</button>
+  </div>
+</div>
+<!-- Travel Allowances End-->
+
+<!-- Project Details and Travel Purpose Start -->
+<div class="row">
+<div class="col-lg-8">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      project Details
+    </div>
+    <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-heading innerpanel-heading">
+          <div class="row">
+            <div class="col-lg-6">
+              <strong>Project Name</strong></div>
+            <div class="col-lg-6">
+              <strong>Project Description</strong>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="row rowmargin">
+            <div class="col-lg-6">
+              <h5>Project1</h5>
+            </div>
+            <div class="col-lg-6">
+              <h5>Project Description</h5>
+            </div>
+          </div>
+          <div class="row rowmargin">
+            <div class="col-lg-6">
+              <h5>Project2</h5>
+            </div>
+            <div class="col-lg-6">
+              <h5>Project Description</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary">Add Project</button>
+    </div>
+  </div>
+</div>
+<!-- Project Details End-->
+
+<!-- Travel Purpose Start-->
+<div class="col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Travel Purpose
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12"><label>Purpose:</label></div>
+        <div class="col-lg-12"><textarea rows="5" cols="40"></textarea></div>
+      </div>
+    </div>
+  </div>
+  <!-- Travel Purpose End-->
+</div>
+</div>
+<div class="clear"></div>
+<div class="col-lg-12">
+  <input type="submit" name="submit" value="Submit" class="btn btn-primary" [disabled]="TravelForm.isValid"> &nbsp; &nbsp;
+  <input type="button" name="cance" value="Cancel" class="btn btn-primary"> 
+</div>
+</form>
